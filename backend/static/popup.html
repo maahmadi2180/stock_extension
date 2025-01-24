@@ -1,109 +1,0 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سامانه معاملات پیشرفته</title>
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/styles.css">
-</head>
-<body class="financial-theme">
-    <header class="header">
-        <div class="header-content">
-            <h1>📈 سامانه تحلیل معاملات با هوش مصنوعی</h1>
-            <div class="header-stats">
-                <div class="stat-box">
-                    <span>💰 ارزش کل معاملات</span>
-                    <span id="totalValue">0 تومان</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main class="container">
-        <!-- بخش تحلیل (سمت چپ) -->
-        <section class="analysis-section">
-            <div class="trades-table">
-                <h2 class="section-title">📋 لیست معاملات (<span id="tradeCount">0</span>)</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>تاریخ</th>
-                                <th>نماد</th>
-                                <th>نوع</th>
-                                <th>حجم واقعی</th>
-                                <th>کارمزد</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tradesList"></tbody>
-                    </table>
-                </div>
-                <button id="analyzeBtn" class="btn-secondary">🧠 تحلیل پیشرفته</button>
-            </div>
-
-            <div class="analysis-card">
-                <div class="card-header">
-                    <h3>📈 تحلیل هوش مصنوعی</h3>
-                </div>
-                <div id="aiAnalysis" class="card-content"></div>
-            </div>
-        </section>
-
-        <!-- بخش ثبت معامله (سمت راست) -->
-        <section class="trade-card">
-            <h2 class="section-title">📝 ثبت معامله جدید</h2>
-            <form id="tradeForm">
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label>📅 تاریخ</label>
-                        <div class="calendar-container">
-                            <input type="text" id="shamsiDate" class="small-date" readonly>
-                            <div id="calendar" class="hidden">
-                                <div class="calendar-header">
-                                    <button type="button" onclick="changeMonth(-1)">‹</button>
-                                    <span id="currentMonthYear"></span>
-                                    <button type="button" onclick="changeMonth(1)">›</button>
-                                </div>
-                                <div class="calendar-grid" id="calendarDays"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                        <label>🏷️ نماد</label>
-                        <input type="text" id="symbol" required>
-                    </div>
-
-                    <div class="input-group">
-                        <label>🎯 نوع معامله</label>
-                        <select id="tradeAction" required>
-                            <option value="buy">🟢 خرید</option>
-                            <option value="sell">🔴 فروش</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group">
-                        <label>💵 قیمت (ریال)</label>
-                        <input type="number" id="price" min="1" required>
-                    </div>
-
-                    <div class="input-group">
-                        <label>🔢 حجم</label>
-                        <input type="number" id="volume" min="1" required>
-                    </div>
-
-                    <div class="input-group">
-                        <label>📝 دلیل معامله</label>
-                        <textarea id="reason" minlength="5" required></textarea>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-primary">✅ ثبت معامله</button>
-            </form>
-        </section>
-    </main>
-
-    <script src="static/app.js"></script>
-</body>
-</html>
