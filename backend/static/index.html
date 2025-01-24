@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سامانه معاملات پیشرفته</title>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body class="financial-theme">
     <header class="header">
@@ -39,7 +39,7 @@
                         <tbody id="tradesList"></tbody>
                     </table>
                 </div>
-                <button id="analyzeBtn" class="btn-secondary hidden">🧠 تحلیل پیشرفته</button>
+                <button id="analyzeBtn" class="btn-secondary">🧠 تحلیل پیشرفته</button>
             </div>
 
             <div class="analysis-card">
@@ -55,7 +55,6 @@
             <h2 class="section-title">📝 ثبت معامله جدید</h2>
             <form id="tradeForm">
                 <div class="form-grid">
-                    <!-- ردیف ۱ -->
                     <div class="input-group">
                         <label>📅 تاریخ</label>
                         <div class="calendar-container">
@@ -76,7 +75,6 @@
                         <input type="text" id="symbol" required>
                     </div>
 
-                    <!-- ردیف ۲ -->
                     <div class="input-group">
                         <label>🎯 نوع معامله</label>
                         <select id="tradeAction" required>
@@ -86,34 +84,10 @@
                     </div>
 
                     <div class="input-group">
-                        <label>📊 نوع دارایی</label>
-                        <select id="assetType" required>
-                            <option value="stock">📊 سهام</option>
-                            <option value="option">📜 اختیار معامله</option>
-                        </select>
-                    </div>
-
-                    <!-- ردیف ۳ -->
-                    <div class="input-group" id="optionTypeGroup" style="display: none;">
-                        <label>🔀 نوع اختیار</label>
-                        <div class="radio-group">
-                            <label>
-                                <input type="radio" name="optionType" value="call" checked>
-                                📈 اختیار خرید
-                            </label>
-                            <label>
-                                <input type="radio" name="optionType" value="put">
-                                📉 اختیار فروش
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="input-group">
                         <label>💵 قیمت (ریال)</label>
                         <input type="number" id="price" min="1" required>
                     </div>
 
-                    <!-- ردیف ۴ -->
                     <div class="input-group">
                         <label>🔢 حجم</label>
                         <input type="number" id="volume" min="1" required>
@@ -130,6 +104,6 @@
         </section>
     </main>
 
-    <script src="/static/app.js"></script>
+    <script src="static/app.js"></script>
 </body>
 </html>
