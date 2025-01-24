@@ -1,9 +1,8 @@
 from fastapi import APIRouter, HTTPException
-from models import Trade
 from openai import OpenAI
+from ..models import Trade
 import os
 import json
-from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
@@ -16,7 +15,6 @@ def get_deepseek_client():
 
 async def get_ai_analysis(trades: list):
     client = get_deepseek_client()
-    
     prompt = f"""
     تحلیل پیشرفته معاملات با مشخصات زیر:
     {json.dumps(trades, indent=2, ensure_ascii=False)}
@@ -26,7 +24,6 @@ async def get_ai_analysis(trades: list):
     2. نقاط قوت و ضعف
     3. پیشنهادات بهبود
     """
-    
     try:
         response = client.chat.completions.create(
             model="deepseek-chat",
@@ -37,7 +34,6 @@ async def get_ai_analysis(trades: list):
             temperature=0.7
         )
         return response.choices[0].message.content
-        
     except Exception as e:
         print("Deepseek API Error:", str(e))
         raise HTTPException(status_code=500, detail=f"خطای API: {str(e)}")
@@ -50,7 +46,6 @@ async def analyze_trades(trades: list[Trade]):
                 status_code=400,
                 detail="حداقل ۳ معامله برای تحلیل الزامی است"
             )
-
         trade_data = [{
             "date": t.date,
             "symbol": t.symbol,
@@ -60,10 +55,8 @@ async def analyze_trades(trades: list[Trade]):
             "fee": t.fee,
             "reason": t.reason
         } for t in trades]
-
         analysis = await get_ai_analysis(trade_data)
-        
-        return JSONResponse({
+        return {
             "status": "success",
             "analysis": analysis,
             "stats": {
@@ -71,11 +64,7 @@ async def analyze_trades(trades: list[Trade]):
                 "total_volume": sum(t.quantity for t in trades),
                 "total_fees": sum(t.fee for t in trades)
             }
-        })
-        
+        }
     except Exception as e:
         print("Server Error:", str(e))
-        raise HTTPException(
-            status_code=500,
-            detail=f"خطای سرور: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"خطای سرور: {str(e)}")
